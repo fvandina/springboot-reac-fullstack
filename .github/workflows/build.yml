@@ -38,4 +38,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Maven Clean Package
-      run: ./mvnw --no-transfer-progress clean package -P build-frontend
+      run:  chmod +x mvnw ./mvnw --no-transfer-progress clean package -P build-frontend
