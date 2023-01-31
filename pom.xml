@@ -56,10 +56,26 @@
                 <configuration>
                     <excludes>
                         <exclude>
-                            <groupId>org.projectlombok</groupId>
+                            <groupId>org.project-lombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <from>
+                        <image>openjdk:17</image>
+                    </from>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                        <format>OCI</format>
+                    </container>
                 </configuration>
             </plugin>
         </plugins>
@@ -75,7 +91,7 @@
                     <plugin>
                         <groupId>com.google.cloud.tools</groupId>
                         <artifactId>jib-maven-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>3.2.1</version>
                         <configuration>
                             <from>
                                 <image>openjdk:17</image>
@@ -85,7 +101,6 @@
                                     <port>8080</port>
                                 </ports>
                                 <format>OCI</format>
-                                <creationTime>2023-01-09T15:19:45+0000</creationTime>
                             </container>
                         </configuration>
                         <executions>
@@ -128,7 +143,7 @@
                     <plugin>
                         <groupId>com.google.cloud.tools</groupId>
                         <artifactId>jib-maven-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>3.2.1</version>
                         <configuration>
                             <from>
                                 <image>openjdk:17</image>
@@ -138,7 +153,6 @@
                                     <port>8080</port>
                                 </ports>
                                 <format>OCI</format>
-                                <creationTime>2023-01-09T15:19:45+0000</creationTime>
                             </container>
                         </configuration>
                         <executions>
@@ -234,9 +248,7 @@
                                             <directory>src/frontend/build</directory>
                                         </resource>
                                     </resources>
-                                    <outputDirectory>
-                                        ${basedir}/target/classes/static
-                                    </outputDirectory>
+                                    <outputDirectory>${basedir}/target/classes/static</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
