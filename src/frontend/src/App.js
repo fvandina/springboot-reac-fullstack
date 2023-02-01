@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import logo from "./logo.png";
+
 import {
   DesktopOutlined,
   FileOutlined,
@@ -22,6 +24,8 @@ import {
   Avatar,
   Radio,
   Popconfirm,
+  Divider,
+  Image,
 } from "antd";
 
 import { deleteStudent, getAllStudents } from "./client";
@@ -309,7 +313,14 @@ function App() {
             textAlign: "center",
           }}
         >
-          Ant Design ©2023 Created by @laguz81
+          <Image width={75} src={logo} alt={"logo"} />
+          <Divider>
+            Ant Design ©2023 Created by @laguz81  for learning &nbsp;
+            <a href="https://amigoscode.com/courses/full-stack-spring-boot-react" target="_blank" rel="noreferrer" >
+              {" "}
+              FullStack Course
+            </a>
+          </Divider>
         </Footer>
       </Layout>
     </Layout>
