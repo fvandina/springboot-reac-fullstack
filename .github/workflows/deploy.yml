@@ -75,11 +75,12 @@ jobs:
           text: ':white_check_mark: pushed wadminfv/springboot-react-fullstack :${{steps.build-number.outputs.BUILD_NUMBER}} to docker hub... https://hub.docker.com/repository/docker/wadminfv/springboot-react-fullstack'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Update and commit app version in docker-compose.yaml
         run: |
           BUILD_NUMBER=${{steps.build-number.outputs.BUILD_NUMBER}}
           echo -e "Current aws-elasticbeanstalk/docker-compose.yml\n$(cat aws-elasticbeanstalk/docker-compose.yml)"
-          sed -i -E 's_(wadminfv/springboot-react-fullstack :)([^"]*)_\1'${BUILD_NUMBER}'_' aws-elasticbeanstalk/docker-compose.yml
+          sed -i -E 's_(wadminfv/springboot-react-fullstack:)([^"]*)_\1'${BUILD_NUMBER}'_' aws-elasticbeanstalk/docker-compose.yml
           echo -e "Current aws-elasticbeanstalk/docker-compose.yml\n$(cat aws-elasticbeanstalk/docker-compose.yml)"
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -95,7 +96,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Beanstalk Deploy
-        uses: einaregilsson/beanstalk-deploy@ebe3476a4ce991d54336935e75e78dd9d86f9408
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
