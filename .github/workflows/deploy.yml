@@ -67,19 +67,19 @@ jobs:
           ./mvnw --no-transfer-progress clean package \
             -P build-frontend \
             -P jib-push-to-dockerhub \
-              -Dapp.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}}
+            -D app.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}}
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
-          text: ':white_check_mark: pushed wadminfv/springboot-reac-fullstack :${{steps.build-number.outputs.BUILD_NUMBER}} to docker hub... https://hub.docker.com/repository/docker/wadminfv/springboot-react-fullstack'
+          text: ':white_check_mark: pushed wadminfv/springboot-react-fullstack :${{steps.build-number.outputs.BUILD_NUMBER}} to docker hub... https://hub.docker.com/repository/docker/wadminfv/springboot-react-fullstack'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Update and commit app version in docker-compose.yaml
         run: |
           BUILD_NUMBER=${{steps.build-number.outputs.BUILD_NUMBER}}
-          echo -e "Current elasticbeanstalk/docker-compose.yml\n$(cat elasticbeanstalk/docker-compose.yml)"
-          sed -i -E 's_(wadminfv/springboot-reac-fullstack :)([^"]*)_\1'${BUILD_NUMBER}'_' aws-elasticbeanstalk/docker-compose.yml
+          echo -e "Current aws-elasticbeanstalk/docker-compose.yml\n$(cat aws-elasticbeanstalk/docker-compose.yml)"
+          sed -i -E 's_(wadminfv/springboot-react-fullstack :)([^"]*)_\1'${BUILD_NUMBER}'_' aws-elasticbeanstalk/docker-compose.yml
           echo -e "Current aws-elasticbeanstalk/docker-compose.yml\n$(cat aws-elasticbeanstalk/docker-compose.yml)"
           git config user.name github-actions
           git config user.email github-actions@github.com
