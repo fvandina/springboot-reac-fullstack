@@ -76,18 +76,6 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-      - name: Update and commit app version in docker-compose.yaml
-        run: |
-          BUILD_NUMBER=${{steps.build-number.outputs.BUILD_NUMBER}}
-          echo -e "Current aws-elasticbeanstalk/docker-compose.yml\n$(cat aws-elasticbeanstalk/docker-compose.yml)"
-          sed -i -E 's_(wadminfv/springboot-react-fullstack:)([^"]*)_\1'${BUILD_NUMBER}'_' aws-elasticbeanstalk/docker-compose.yml
-          echo -e "Current aws-elasticbeanstalk/docker-compose.yml\n$(cat aws-elasticbeanstalk/docker-compose.yml)"
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add aws-elasticbeanstalk/docker-compose.yml
-          git commit -m "new app version: ${BUILD_NUMBER}"
-          git push
-
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -107,6 +95,7 @@ jobs:
           version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
           version_description: Version ${{steps.build-number.outputs.BUILD_NUMBER}} deployed via github actions ${{ github.sha }}
           wait_for_deployment: 60
+
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
