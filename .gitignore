@@ -36,5 +36,4 @@ build/
 ### REACT ###
 src/frontend/node_modules/**
 src/frontend/node/**
-src/frontend/public/**
 src/frontend/build/**
