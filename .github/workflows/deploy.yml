@@ -6,6 +6,12 @@ on:
 
   workflow_dispatch:
 
+uses: szenius/set-timezone@v1.0
+with:
+  timezoneLinux: "America/Guayaquil"
+  timezoneMacos: "America/Guayaquil"
+  timezoneWindows: "America/Guayaquil"
+
 env:
   # Postgres
   POSTGRESQL_VERSION: 13.7
