@@ -6,12 +6,6 @@ on:
 
   workflow_dispatch:
 
-uses: szenius/set-timezone@v1.0
-with:
-  timezoneLinux: "America/Guayaquil"
-  timezoneMacos: "America/Guayaquil"
-  timezoneWindows: "America/Guayaquil"
-
 env:
   # Postgres
   POSTGRESQL_VERSION: 13.7
@@ -42,6 +36,11 @@ jobs:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
+      - name: Setup timezone
+      - uses: zcong1993/setup-timezone@master
+        with:
+          timezone: America/Guayaquil
+          
       - uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
