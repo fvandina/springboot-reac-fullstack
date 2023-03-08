@@ -15,27 +15,27 @@ const checkStatus = (response) => {
   return Promise.reject(error);
 };
 
-export const getAllStudents = () =>
-  fetch("/api/v1/students", {
+export const getAllStudents = async () =>
+  await fetch("/api/v1/students", {
     headers: headers,
     method: "GET",
   }).then(checkStatus);
 
-export const addNewStudent = (student) =>
-  fetch("api/v1/students", {
+export const addNewStudent = async (student) =>
+  await fetch("api/v1/students", {
     headers: headers,
     method: "POST",
     body: JSON.stringify(student),
   }).then(checkStatus);
 
-export const deleteStudent = (id) =>
-  fetch(`api/v1/students/${id}`, {
+export const deleteStudent = async(id) =>
+  await fetch(`api/v1/students/${id}`, {
     headers: headers,
     method: "DELETE",
   }).then(checkStatus);
 
-export const editStudent = (student) =>
-  fetch("api/v1/students", {
+export const editStudent = async (student) =>
+  await fetch("api/v1/students", {
     headers: headers,
     method: "PUT",
     body: JSON.stringify(student),

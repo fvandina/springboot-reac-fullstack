@@ -110,7 +110,7 @@ const removeStudent = (student, callback) => {
 
 const columns = (fetchStudents) => [
   {
-    title: "",
+    title: "Actions",
     dataIndex: "action",
     key: "action",
     render: (text, student) => (
@@ -133,7 +133,7 @@ const columns = (fetchStudents) => [
     ),
   },
   {
-    title: "",
+    title: "Avatar",
     dataIndex: "avatar",
     key: "avatar",
     render: (text, student) => <TheAvatar student={student} />,
